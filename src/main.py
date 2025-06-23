@@ -7,7 +7,7 @@ from collections import Counter
 
 # variables
 track_limit = 50    # the amount of tracks to scan
-times_played = 3    # amount of times a track needs to be played to recommend
+times_played = 2    # amount of times a track needs to be played to recommend
 
 
 # AUTH HANDLING
@@ -36,12 +36,14 @@ counter_items = Counter(recently_played).items()
 
 track_recommendations = []
 
-print(counter_items)
-
 for track in counter_items:
     if(track[1] >= times_played):
         track_recommendations.append(track)
         
-if(len(track_recommendations) == 0):
+if(len(track_recommendations) > 0):
+    print("tracks you have played {0} times lately:".format(times_played))
+    for track in track_recommendations:
+        print(" - " + track[0] + " ({0})".format(track[1]))
+else:
     print("No tracks to recommend")
 
